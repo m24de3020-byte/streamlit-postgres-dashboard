@@ -2,9 +2,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
-from database import db
-import io
-
+from database import execute_query
 # Page configuration
 st.set_page_config(
     page_title="PostgreSQL Dashboard",
@@ -81,7 +79,7 @@ elif page == "Data Explorer":
     
     if st.button("Execute Query"):
         try:
-            columns, data = db.execute_query(query_input)
+            columns, data = execute_query(query_input)
             if columns:
                 df = pd.DataFrame(data, columns=columns)
                 st.success(f"Query executed successfully! Rows: {len(df)}")
